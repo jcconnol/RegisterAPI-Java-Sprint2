@@ -5,6 +5,8 @@ import java.util.UUID;
 import org.apache.commons.lang3.StringUtils;
 
 import edu.uark.commands.ResultCommandInterface;
+import edu.uark.controllers.exceptions.ConflictException;
+import edu.uark.controllers.exceptions.UnprocessableEntityException;
 import edu.uark.models.api.Product;
 import edu.uark.models.api.enums.ProductApiRequestStatus;
 import edu.uark.models.entities.ProductEntity;
@@ -15,7 +17,8 @@ public class ProductSaveCommand implements ResultCommandInterface<Product> {
 	@Override
 	public Product execute() {
 		if (StringUtils.isBlank(this.apiProduct.getLookupCode())) {
-			return (new Product()).setApiRequestStatus(ProductApiRequestStatus.INVALID_INPUT);
+			throw new UnprocessableEntityException("lookupcode");
+			//return (new Product()).setApiRequestStatus(ProductApiRequestStatus.INVALID_INPUT);
 		}
 		
 		ProductEntity productEntity = this.productRepository.get(this.apiProduct.getId());
@@ -26,7 +29,9 @@ public class ProductSaveCommand implements ResultCommandInterface<Product> {
 			if (productEntity == null) {
 				productEntity = new ProductEntity(this.apiProduct);
 			} else {
-				return (new Product()).setApiRequestStatus(ProductApiRequestStatus.LOOKUP_CODE_ALREADY_EXISTS);
+				
+				throw new ConflictException("lookupcode");
+				//return (new Product()).setApiRequestStatus(ProductApiRequestStatus.LOOKUP_CODE_ALREADY_EXISTS);
 			}
 		}
 		
