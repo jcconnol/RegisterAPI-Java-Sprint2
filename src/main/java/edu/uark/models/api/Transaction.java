@@ -2,6 +2,11 @@ package edu.uark.models.api;
 
 import java.util.UUID;
 
+import org.apache.commons.lang3.StringUtils;
+
+import edu.uark.models.api.enums.TransactionApiRequestStatus;
+import edu.uark.models.entities.TransactionEntity;
+
 public class Transaction {	
 	private UUID id;
 	public UUID getId() {
@@ -65,13 +70,42 @@ public class Transaction {
 		this.recordID = "";
 		this.refID = "";
 	}
+	private TransactionApiRequestStatus apiRequestStatus;
+	public TransactionApiRequestStatus getApiRequestStatus() 
+	{
+		return this.apiRequestStatus;
+	}
+	public Transaction setApiRequestStatus(TransactionApiRequestStatus apiRequestStatus) 
+	{
+		if (this.apiRequestStatus != apiRequestStatus) 
+		{
+			this.apiRequestStatus = apiRequestStatus;
+		}
+		
+		return this;
+	}
 	
-	public Transaction(Transaction transactionEntity) {
+	private String apiRequestMessage;
+	public String getApiRequestMessage() 
+	{
+		return this.apiRequestMessage;
+	}
+	public Transaction setApiRequestMessage(String apiRequestMessage) 
+	{
+		if (!StringUtils.equalsIgnoreCase(this.apiRequestMessage, apiRequestMessage)) 
+		{
+			this.apiRequestMessage = apiRequestMessage;
+		}
+		
+		return this;
+	}
+	
+	public Transaction(TransactionEntity transactionEntity) {
 		this.id = transactionEntity.getId();
-		this.employeeID = transactionEntity.getEmployeeID();
+		//this.employeeID = transactionEntity.getEmployeeID();
 		this.totalAmt = transactionEntity.getTotalAmt();
-		this.type = transactionEntity.getType();
+		//this.type = transactionEntity.getType();
 		this.recordID = transactionEntity.getRecordID();
-		this.refID = transactionEntity.getRefID();
+		//this.refID = transactionEntity.getRefID();
 	}
 }

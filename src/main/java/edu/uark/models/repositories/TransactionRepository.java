@@ -41,4 +41,10 @@ public class TransactionRepository extends BaseRepository<TransactionEntity> imp
 	public TransactionRepository() {
 		super(DatabaseTable.TRANSACTION);
 	}
+
+	@Override
+	public TransactionEntity byTotal_Amt(String totalAmt) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

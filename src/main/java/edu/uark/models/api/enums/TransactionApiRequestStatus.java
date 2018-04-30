@@ -2,6 +2,7 @@ package edu.uark.models.api.enums;
 
 import java.util.HashMap;
 import java.util.Map;
+import edu.uark.models.api.Transaction;
 
 public enum TransactionApiRequestStatus 
 {

@@ -5,5 +5,7 @@ import edu.uark.models.entities.TransactionEntity;
 
 public interface TransactionRepositoryInterface extends BaseRepositoryInterface<TransactionEntity> {
 	TransactionEntity byRecordID(String recordID);
+
+	TransactionEntity byTotal_Amt(String totalAmt);
 }
 

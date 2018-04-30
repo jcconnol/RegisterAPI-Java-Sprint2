@@ -25,6 +25,7 @@ public class EmployeeEntity extends BaseEntity<EmployeeEntity> {
 		this.employeeId = rs.getString(EmployeeFieldNames.EMPLOYEE_ID);
 		this.managerId = ((UUID) rs.getObject(EmployeeFieldNames.MANAGER_ID));
 		this.classification = EmployeeClassification.map(rs.getInt(EmployeeFieldNames.CLASSIFICATION));
+		this.salesNumber = rs.getInt(EmployeeFieldNames.SALES_NUMBER);
 	}
 
 	@Override
@@ -117,6 +118,29 @@ public class EmployeeEntity extends BaseEntity<EmployeeEntity> {
 		
 		return this;
 	}
+	
+	private int sales;
+	public int getSales() {
+		return this.sales;
+	}
+	public void setSales(int sales) {
+		if (this.sales != sales) {
+			this.sales = sales;
+			this.propertyChanged(EmployeeFieldNames.SALES_NUMBER);
+			}
+		}
+
+	private int salesNumber;
+	public int getSalesNumber() {
+		return this.salesNumber;
+	}
+	public EmployeeEntity setSalesNumber(int salesNumber) {
+		if(this.salesNumber != salesNumber) {
+			this.salesNumber = salesNumber;
+			
+		}
+		return this;
+	}
 
 	private UUID managerId;
 	public UUID getManagerId() {
@@ -189,4 +213,5 @@ public class EmployeeEntity extends BaseEntity<EmployeeEntity> {
 		this.password = EmployeeEntity.hashPassword(
 			apiEmployee.getPassword());
 	}
+
 }

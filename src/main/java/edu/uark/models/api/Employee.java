@@ -81,6 +81,15 @@ public class Employee {
 		return this;
 	}
 	
+	private int salesNumber;
+	public int getSalesNumber() {
+		return this.salesNumber;
+	}
+	public Employee setSalesNumber(int salesNumber) {
+		this.salesNumber = salesNumber;
+		return this;
+	}
+	
 	private LocalDateTime createdOn;
 	public LocalDateTime getCreatedOn() {
 		return this.createdOn;
@@ -100,6 +109,7 @@ public class Employee {
 		this.employeeId = StringUtils.EMPTY;
 		this.createdOn = LocalDateTime.now();
 		this.classification = EmployeeClassification.NOT_DEFINED.getValue();
+		this.salesNumber = 0;
 	}
 	
 	public Employee(EmployeeEntity employeeEntity) {
@@ -112,5 +122,6 @@ public class Employee {
 		this.managerId = employeeEntity.getManagerId();
 		this.employeeId = employeeEntity.getEmployeeId();
 		this.classification = employeeEntity.getClassification().getValue();
+		this.salesNumber = employeeEntity.getSalesNumber();
 	}
 }
