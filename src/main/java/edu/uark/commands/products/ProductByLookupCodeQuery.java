@@ -9,12 +9,14 @@ import edu.uark.models.api.Product;
 import edu.uark.models.entities.ProductEntity;
 import edu.uark.models.repositories.ProductRepository;
 import edu.uark.models.repositories.interfaces.ProductRepositoryInterface;
+import edu.uark.models.api.enums.ProductApiRequestStatus;
 
 public class ProductByLookupCodeQuery implements ResultCommandInterface<Product> {
 	@Override
 	public Product execute() {
 		if (StringUtils.isBlank(this.lookupCode)) {
 			throw new UnprocessableEntityException("lookupcode");
+			//return new Product().setApiRequestStatus(ProductApiRequestStatus.INVALID_INPUT);
 		}
 		
 		ProductEntity productEntity = this.productRepository.byLookupCode(this.lookupCode);
@@ -22,6 +24,7 @@ public class ProductByLookupCodeQuery implements ResultCommandInterface<Product>
 			return new Product(productEntity);
 		} else {
 			throw new NotFoundException("Product");
+			//return new Product().setApiRequestStatus(ProductApiRequestStatus.NOT_FOUND);
 		}
 	}
 

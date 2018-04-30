@@ -2,6 +2,7 @@ package edu.uark.models.api;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
+import edu.uark.models.api.enums.ProductApiRequestStatus;
 
 import edu.uark.models.entities.ProductEntity;
 
@@ -47,6 +48,21 @@ public class Product {
 		this.lookupCode = "";
 		this.id = new UUID(0, 0);
 		this.createdOn = LocalDateTime.now();
+	}
+	
+	private ProductApiRequestStatus apiRequestStatus;
+	public ProductApiRequestStatus getApiRequestStatus() 
+	{
+		return this.apiRequestStatus;
+	}
+	public Product setApiRequestStatus(ProductApiRequestStatus apiRequestStatus) 
+	{
+		if (this.apiRequestStatus != apiRequestStatus) 
+		{
+			this.apiRequestStatus = apiRequestStatus;
+		}
+		
+		return this;
 	}
 	
 	public Product(ProductEntity productEntity) {
